@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Repository;
-
 use App\Entity\Playlist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
 /**
  * @extends ServiceEntityRepository<Playlist>
  *
@@ -16,24 +13,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PlaylistRepository extends ServiceEntityRepository
 {
+    const FORMATION_FIELD = 'formations';
+    const NAME_FIELD = 'name';
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Playlist::class);
     }
-
     public function add(Playlist $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
-
         if ($flush) {
             $this->getEntityManager()->flush();
         }
     }
-
     public function remove(Playlist $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
-
         if ($flush) {
             $this->getEntityManager()->flush();
         }
@@ -47,9 +43,9 @@ class PlaylistRepository extends ServiceEntityRepository
      */
     public function findAllOrderByName($ordre): array{
         return $this->createQueryBuilder('p')
-                ->leftjoin('p.formations', 'f')
+                ->leftjoin('p.' . self::FORMATION_FIELD, 'f')
                 ->groupBy('p.id')
-                ->orderBy('p.name', $ordre)
+                ->orderBy('p.' . self::NAME_FIELD, $ordre)
                 ->getQuery()
                 ->getResult();       
     } 
@@ -68,27 +64,25 @@ class PlaylistRepository extends ServiceEntityRepository
         }    
         if($table==""){      
             return $this->createQueryBuilder('p')
-                    ->leftjoin('p.formations', 'f')
+                    ->leftjoin('p.' . self::FORMATION_FIELD, 'f')
                     ->where('p.'.$champ.' LIKE :valeur')
                     ->setParameter('valeur', '%'.$valeur.'%')
                     ->groupBy('p.id')
-                    ->orderBy('p.name', 'ASC')
+                    ->orderBy('p.' . self::NAME_FIELD, 'ASC')
                     ->getQuery()
                     ->getResult();              
         }else{   
             return $this->createQueryBuilder('p')
-                    ->leftjoin('p.formations', 'f')
+                    ->leftjoin('p.' . self::FORMATION_FIELD, 'f')
                     ->leftjoin('f.categories', 'c')
                     ->where('c.'.$champ.' LIKE :valeur')
                     ->setParameter('valeur', '%'.$valeur.'%')
                     ->groupBy('p.id')
-                    ->orderBy('p.name', 'ASC')
+                    ->orderBy('p.' . self::NAME_FIELD, 'ASC')
                     ->getQuery()
                     ->getResult();              
-            
+
         }           
     }    
-
-
     
 }
