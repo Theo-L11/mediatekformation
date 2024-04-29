@@ -1,7 +1,7 @@
 {% extends "basefront.html.twig" %}
 {% block body %}
     <table class="table table-striped">
-        <caption>Tableau montrant les playlists disponibles acctuellement</caption>
+        <caption>Tableau des playlists disponibles</caption>
         <thead>
             <tr>
                 <th class="text-left align-top" scope="col">
@@ -34,8 +34,14 @@
                     </form>            
                 </th>
                 <th class="text-center align-top" scope="col">
-                    &nbsp;
-                </th>				
+                    &nbsp;				
+                </th>
+                <th class="text-center align-top" scope="col">
+                    Nombre de formations<br />
+                    <a href="{{ path('playlists.sort', {champ:'number', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('playlists.sort', {champ:'number', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -57,8 +63,11 @@
                             {% endif %}
                         </td>            					
                         <td class="text-center">
-                            <a href="{{ path('playlists.showone', {id:playlists[k].id}) }}" class="btn btn-secondary">Voir détail</a>
-                        </td> 					
+                            <a href="{{ path('playlists.showone', {id:playlists[k].id}) }}" class="btn btn-secondary">Voir détail</a>				
+                        </td>
+                        <td class="text-center">
+                            {{ playlists[k].formations|length }} vidéos
+                        </td>
                     </tr>
                 {% endfor %}	
             {% endif %}
