@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 /**
- * Controleur des formations
+ * Controleur des formations partie admin
  *
  * @author Titi L
  */
@@ -44,7 +44,7 @@ class AdminFormationsController extends AbstractController {
         ]);
     }
     /**
-     * @Route("/admin/formations/tri/{champ}/{ordre}/{table}", name="admin.formations.sort")
+     * @Route("/admin/tri/{champ}/{ordre}/{table}", name="admin.formations.sort")
      * @param type $champ
      * @param type $ordre
      * @param type $table
@@ -59,7 +59,7 @@ class AdminFormationsController extends AbstractController {
         ]);
     }
     /**
-     * @Route("/admin/formations/recherche/{champ}/{table}", name="admin.formations.findallcontain")
+     * @Route("/admin/recherche/{champ}/{table}", name="admin.formations.findallcontain")
      * @param type $champ
      * @param Request $request
      * @param type $table
@@ -81,7 +81,7 @@ class AdminFormationsController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/formations/suppr/{id}", name="admin.formation.suppr")
+     * @Route("/admin/suppr/{id}", name="admin.formation.suppr")
      * @param Formation $formation
      * @return Response
      */
@@ -91,7 +91,7 @@ class AdminFormationsController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/formations/edit/{id}", name="admin.formation.modif")
+     * @Route("/admin/modif/{id}", name="admin.formation.modif")
      * @param Formation $formation
      * @param Request $request
      * @return Response
@@ -112,7 +112,7 @@ class AdminFormationsController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/formations/ajout", name="admin.formation.ajout")
+     * @Route("/admin/ajout", name="admin.formation.ajout")
      * @param Request $request
      * @return Response
      */
