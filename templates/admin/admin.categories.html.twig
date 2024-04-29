@@ -1,0 +1,45 @@
+{% extends "baseadmin.html.twig" %}
+{% block body %}
+    <div class="text-center mt-3">
+        <h1>Gestion des catégories</h1>
+    </div>
+    <div class="row mt-4 col-_8 mx-auto">
+        <h5>Ajouter une catégorie:</h5>
+        <form class="form-inline" method="POST" action="{{ path('admin.categorie.ajout') }}">
+            <div class="form-group mr-1 mb-2">
+                <input type="text" class="sm" name="nom">
+                <input type="hidden" name="_token" value="{{ csrf_token('form_ajout_categorie') }}">
+                <button type="submit" class="btn btn-primary mb-2 btn-sm">Ajouter</button>
+            </div>
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </form>
+        <table class="table table-striped">
+            <caption>Tableau de gestion des catégories</caption>
+            <thead>
+                <tr>
+                    <th class="text-left align-top" scope="col">Catégories</th>
+                    <th class="text-left align-top" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categorie in categories %}
+                    <tr class="align-midle">
+                        <td class="text-left">
+                            <h5 class="text-info">
+                                {{ categorie.name }}
+                            </h5>
+                        </td>
+                        <td class="text-left">
+                            <a href="{{ path('admin.categorie.suppr', {id:categorie.id}) }}" class="btn btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

@@ -94,7 +94,19 @@ class AdminPlaylistsController extends AbstractController {
      * @return Response
      */
     public function findAllContain($champ, Request $request, $table = ""): Response {
-        if ($this->isCsrfTokenValid('filtre_' . $champ, $request->get('_token'))) {
+        if ($table === "playlists") {
+            if ($this->isCsrfTokenValid('filtre_' . $champ, $request->get('_token'))) {
+                $valeur = $request->get("recherche");
+                $playlists = $this->playlistRepository->findByContainValue($champ, $valeur, $table);
+                $categories = $this->categorieRepository->findAll();
+                return $this->render(self::TEMPLATE_PLAYLISTS, [
+                            'playlists' => $playlists,
+                            'categories' => $categories,
+                            'valeur' => $valeur,
+                            'table' => $table
+                ]);
+            }
+        } else {
             $valeur = $request->get("recherche");
             $playlists = $this->playlistRepository->findByContainValue($champ, $valeur, $table);
             $categories = $this->categorieRepository->findAll();
@@ -162,11 +174,10 @@ class AdminPlaylistsController extends AbstractController {
         $playlistFormations = $this->formationRepository->findAllForOnePlaylist($playlist);
         if (count($playlistFormations) > 0) {
             $this->addFlash('danger', 'Impossible de supprimer une playlist contenant des formations');
-            return $this->redirectToRoute('admin.playlists');
         } else {
             $this->playlistRepository->remove($playlist, true);
-            return $this->redirectToRoute('admin.playlists');
         }
+        return $this->redirectToRoute('admin.playlists');
     }
 
 }
