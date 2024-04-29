@@ -25,6 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminPlaylistsController extends AbstractController {
 
     const TEMPLATE_PLAYLISTS = "admin/admin.playlists.html.twig";
+    const ROUTE_PLAYLISTS = "admin.playlists";
 
     /**
      * 
@@ -117,7 +118,7 @@ class AdminPlaylistsController extends AbstractController {
                         'table' => $table
             ]);
         }
-        return $this->redirectToRoute('admin.playlists');
+        return $this->redirectToRoute(self::ROUTE_PLAYLISTS);
     }
 
     /**
@@ -133,7 +134,7 @@ class AdminPlaylistsController extends AbstractController {
         $formPlaylist->handleRequest($request);
         if ($formPlaylist->isSubmitted() && $formPlaylist->isValid()) {
             $this->playlistRepository->add($playlist, true);
-            return $this->redirectToRoute('admin.playlists');
+            return $this->redirectToRoute(self::ROUTE_PLAYLISTS);
         }
 
         return $this->render("admin/adminplaylistmodif.html.twig", [
@@ -156,7 +157,7 @@ class AdminPlaylistsController extends AbstractController {
         $formPlaylist->handleRequest($request);
         if ($formPlaylist->isSubmitted() && $formPlaylist->isValid()) {
             $this->playlistRepository->add($playlist, true);
-            return $this->redirectToRoute('admin.playlists');
+            return $this->redirectToRoute(self::ROUTE_PLAYLISTS);
         }
 
         return $this->render("admin/adminplaylistajout.html.twig", [
@@ -177,7 +178,7 @@ class AdminPlaylistsController extends AbstractController {
         } else {
             $this->playlistRepository->remove($playlist, true);
         }
-        return $this->redirectToRoute('admin.playlists');
-    }
+            return $this->redirectToRoute(self::ROUTE_PLAYLISTS);
+        }
 
 }

@@ -17,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminFormationsController extends AbstractController {
     const TEMPLATE_FORMATIONS = "admin/admin.formations.html.twig";
+    const ROUTE_FORMATIONS = "admin.formations";
+
     /**
      * 
      * @var FormationRepository
@@ -89,7 +91,7 @@ class AdminFormationsController extends AbstractController {
                 ]);
             }
         }
-        return $this->redirectToRoute('admin.formations');
+        return $this->redirectToRoute(self::ROUTE_FORMATIONS);
     }
 
     /**
@@ -99,7 +101,7 @@ class AdminFormationsController extends AbstractController {
      */
     public function suppr(Formation $formation): Response {
         $this->formationRepository->remove($formation, true);
-        return $this->redirectToRoute('admin.formations');
+        return $this->redirectToRoute(self::ROUTE_FORMATIONS);
     }
 
     /**
@@ -113,7 +115,7 @@ class AdminFormationsController extends AbstractController {
         $formFormation->handleRequest($request);
         if($formFormation->isSubmitted() && $formFormation->isValid()) {
             $this->formationRepository->add($formation, true);
-            return $this->redirectToRoute('admin.formations');
+        return $this->redirectToRoute(self::ROUTE_FORMATIONS);
         }
 
         return $this->render("admin/adminformationmodif.html.twig", [
@@ -133,7 +135,7 @@ class AdminFormationsController extends AbstractController {
         $formFormation->handleRequest($request);
         if($formFormation->isSubmitted() && $formFormation->isValid()) {
             $this->formationRepository->add($formation, true);
-            return $this->redirectToRoute('admin.formations');
+            return $this->redirectToRoute(self::ROUTE_FORMATIONS);
         }
 
         return $this->render("admin/adminformationajout.html.twig", [

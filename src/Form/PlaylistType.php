@@ -14,6 +14,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PlaylistType extends AbstractType {
 
+    /**
+     * Création du formulaire pour ajouter ou modifier une playlist
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
                 ->add('name', null, [
@@ -26,6 +32,11 @@ class PlaylistType extends AbstractType {
         ;
     }
 
+    /**
+     * Configure les options du formulaire
+     * @param OptionsResolver $resolver
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void {
         $resolver->setDefaults([
             'data_class' => Playlist::class,
