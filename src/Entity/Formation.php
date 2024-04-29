@@ -5,6 +5,8 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=FormationRepository::class)
  */
@@ -14,29 +16,38 @@ class Formation
      * Début de chemin vers les images
      */
     private const CHEMIN_IMAGE = "https://i.ytimg.com/vi/";
-
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\NotBlank(message="La date est obligatoire")
+     * @Assert\LessThanOrEqual("now", message="La date ne peut-être postérieure à la date d'aujourd'hui")
      */
     private $publishedAt;
+
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\NotBlank(message="Le titre est obligatoire")
      */
     private $title;
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\NotBlank(message="L'id de la vidéo est obligatoire")
      */
     private $videoId;
+
     /**
      * @ORM\ManyToOne(targetEntity=Playlist::class, inversedBy="formations")
      */
@@ -87,17 +98,14 @@ class Formation
         $this->description = $description;
         return $this;
     }
-
     public function getMiniature(): ?string
     {
         return self::CHEMIN_IMAGE.$this->videoId."/default.jpg";
     }
-
     public function getPicture(): ?string
     {
         return self::CHEMIN_IMAGE.$this->videoId."/hqdefault.jpg";
     }
-
     public function getVideoId(): ?string
     {
         return $this->videoId;
