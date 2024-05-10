@@ -54,6 +54,6 @@ Cette page s'affiche lorsque l'administrateur clique sur "catégories" dans le m
 - Récupérer le fichier mediatekformation.sql en racine du projet et l'utiliser pour créer la BDD MySQL "mediatekformation" en root sans pwd (si vous voulez mettre un login/pwd d'accès, il faut le préciser dans le fichier ".env" en racine du projet).
 - De préférence, ouvrir l'application dans un IDE professionnel. L'adresse pour la lancer est : http://localhost/mediatekformation/public/index.php
 ## Tester l'application en ligne
-L'application est disponible en ligne à cette adresse : [http://mediatekformationlchz.go.yj.fr](https://www.mediatekformationn.go.yj.fr/mediatekformation/public/) <br>
-La page d'authentification est disponible en rajoutant admin à l'adresse : [http://mediatekformationlchz.go.yj.fr/admin](https://www.mediatekformationn.go.yj.fr/mediatekformation/public/admin) <br>
+L'application est disponible en ligne à cette adresse : [https://www.mediatekformationn.go.yj.fr/mediatekformation/public/](https://www.mediatekformationn.go.yj.fr/mediatekformation/public/) <br>
+La page d'authentification est disponible en rajoutant admin à l'adresse : [https://mediatekformationn.go.yj.fr/mediatekformation/public/admin](https://www.mediatekformationn.go.yj.fr/mediatekformation/public/admin) <br>
 La documentation technique est disponible à cette adresse : [https://mediatekformationlchz.go.yj.fr/mediatekformation_doc/](https://mediatekformationlchz.go.yj.fr/mediatekformation_doc/)
